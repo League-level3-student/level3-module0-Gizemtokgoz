@@ -22,8 +22,9 @@ public class PixelArtMaker implements MouseListener, ActionListener{
     private GridInputPanel gip;
     private GridPanel gp;
     ColorSelectionPanel csp;
+    private JButton save;
     
-    private static final String DATA_FILE = "src/_05_Serialization/saved.dat";
+    private static final String DATA_FILE = "src/_05_Pixel_Art/saved.dat";
 
     public void start() {
         gip = new GridInputPanel(this);	
@@ -44,7 +45,7 @@ public class PixelArtMaker implements MouseListener, ActionListener{
         window.add(gp);
         window.add(csp);
         
-        JButton save = new JButton("Save");
+        save = new JButton("Save");
         window.add(save);
         save.addActionListener(this);
         
@@ -107,5 +108,23 @@ public class PixelArtMaker implements MouseListener, ActionListener{
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 		
+		if (arg0.getSource().equals(save)) {
+			save(gp);
+		} else {
+			gp = load();
+			
+			csp = new ColorSelectionPanel();
+	        window.remove(gip);
+	        window.add(gp);
+	        window.add(csp);
+	        
+	        save = new JButton("Save");
+	        window.add(save);
+	        save.addActionListener(this);
+	        
+	        gp.repaint();
+	        gp.addMouseListener(this);
+	        window.pack();
+		}
 	}
 }
