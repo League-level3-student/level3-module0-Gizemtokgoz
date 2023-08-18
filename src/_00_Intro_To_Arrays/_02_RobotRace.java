@@ -29,27 +29,74 @@ public class _02_RobotRace {
 		robot[4].setX(700);
 	// 5. use another for loop to iterate through the array and make each robot move
 	// a random amount less than 50.
-		for (int i = 0; i < robot.length; i++) {
-			robot[i].setSpeed(20);
-		}
-		Random rand = new Random();
-		int rand_int = rand.nextInt(50);
-		for (int i = 0; i < robot.length; i++) {
-			robot[i].move(rand_int);
-			System.out.println(i);
-		}
+		
+		Thread r1 = new Thread( ()-> {
+			robot[0].setSpeed(20);
+			Random rand = new Random();
+			int rand_int = rand.nextInt(50);
+			for (int i = 0; i < robot.length; i++) {
+				robot[0].move(rand_int);
+				System.out.println(i);
+			}
+		});
+		Thread r2 = new Thread( ()-> {
+			robot[1].setSpeed(20);
+			Random rand = new Random();
+			int rand_int = rand.nextInt(50);
+			for (int i = 0; i < robot.length; i++) {
+				robot[1].move(rand_int);
+				System.out.println(i);
+			}
+		});
+		Thread r3 = new Thread( ()-> {
+			robot[2].setSpeed(20);
+			Random rand = new Random();
+			int rand_int = rand.nextInt(50);
+			for (int i = 0; i < robot.length; i++) {
+				robot[2].move(rand_int);
+				System.out.println(i);
+			}
+		});
+		Thread r4 = new Thread( ()-> {
+			robot[3].setSpeed(20);
+			Random rand = new Random();
+			int rand_int = rand.nextInt(50);
+			for (int i = 0; i < robot.length; i++) {
+				robot[3].move(rand_int);
+				System.out.println(i);
+			}
+		});
+		Thread r5 = new Thread( ()-> {
+			robot[4].setSpeed(20);
+			Random rand = new Random();
+			int rand_int = rand.nextInt(50);
+			for (int i = 0; i < robot.length; i++) {
+				robot[4].move(rand_int);
+				System.out.println(i);
+			}
+		});
+		
+		r1.start();
+		r2.start();
+		r3.start();
+		r4.start();
+		r5.start();
 	// 6. use a while loop to repeat step 5 until a robot has reached the top of the
 	// screen.
 		boolean gamerun = true;
-		int winningrobot = -1;
+		int winningrobot = 0;
 		while (gamerun == true) {
 			for (int i = 0; i < robot.length; i++) {
-				rand_int = rand.nextInt(50);
-				robot[i].move(rand_int);
 				if (robot[i].getY()<0) {
 					gamerun = false;
-					winningrobot = i+1;
+					winningrobot = i;
 					break;
+				} else {
+					r1.start();
+					r2.start();
+					r3.start();
+					r4.start();
+					r5.start();
 				}
 			}
 		}
